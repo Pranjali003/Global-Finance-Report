@@ -1,0 +1,154 @@
+table 'Sales All'
+	lineageTag: 26371dad-10e0-4024-8336-3ab723bf58a9
+
+	column 'Product Group'
+		dataType: string
+		lineageTag: b6fd27fa-b7ca-4ed9-a116-9cf8c5821295
+		summarizeBy: none
+		sourceColumn: Product Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Type'
+		dataType: string
+		lineageTag: cb75e1bd-86e0-4aed-aa0b-126e91863096
+		summarizeBy: none
+		sourceColumn: Product Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue target 24/25'
+		dataType: string
+		lineageTag: 34711286-6198-478d-9a82-4682b41368ed
+		summarizeBy: none
+		sourceColumn: Revenue target 24/25
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue target GM%'
+		dataType: string
+		lineageTag: 49a050ce-a4f9-43e6-9612-1da2884da5a4
+		summarizeBy: none
+		sourceColumn: Revenue target GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Intake Target volume'
+		dataType: string
+		lineageTag: f4b9d0ef-5ae7-403e-8f94-a084938fc930
+		summarizeBy: none
+		sourceColumn: Order Intake Target volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Intake Target GM%'
+		dataType: string
+		lineageTag: aef2a9ec-538d-4bbe-aa3d-8d2273eabb03
+		summarizeBy: none
+		sourceColumn: Order Intake Target GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OPL23 OI volume'
+		dataType: string
+		lineageTag: 87e61ff4-2621-4f75-90b0-a6c000999e1c
+		summarizeBy: none
+		sourceColumn: OPL23 OI volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OPL23 OI GM'
+		dataType: string
+		lineageTag: 999d2295-728a-4b62-a5e6-b4ee9774abed
+		summarizeBy: none
+		sourceColumn: OPL23 OI GM
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI YTD 22/23'
+		dataType: string
+		lineageTag: 442dc837-de9d-413d-a1b2-da054f379972
+		summarizeBy: none
+		sourceColumn: OI YTD 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI YTD GM%'
+		dataType: string
+		lineageTag: ae71e0b0-956f-49d7-9edb-1c3695e8ca96
+		summarizeBy: none
+		sourceColumn: OI YTD GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Estimate 22/23'
+		dataType: string
+		lineageTag: 861ce5ed-1387-4455-853f-1ce74f233092
+		summarizeBy: none
+		sourceColumn: OI Estimate 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Estimate GM%'
+		dataType: string
+		lineageTag: 37e278fa-6efb-4521-8322-420b535cb6f6
+		summarizeBy: none
+		sourceColumn: OI Estimate GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Budget 23/24'
+		dataType: string
+		lineageTag: 9aa4b782-e3ce-4f36-b40d-68f9656ca525
+		summarizeBy: none
+		sourceColumn: OI Budget 23/24
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Budget GM%'
+		dataType: string
+		lineageTag: 8b1bf5ce-4369-4362-b997-1b28923bb01b
+		summarizeBy: none
+		sourceColumn: OI Budget GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue Covered by Backlog'
+		dataType: string
+		lineageTag: 99ed057e-bd2f-46f8-afd9-b713999a60cc
+		summarizeBy: none
+		sourceColumn: Revenue Covered by Backlog
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline X'
+		dataType: string
+		lineageTag: ac863eb6-5099-4a40-baab-9ee3b00b416b
+		summarizeBy: none
+		sourceColumn: Pipeline X
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Y'
+		dataType: string
+		lineageTag: 3848e396-8066-47ed-85d5-9ba67efeb468
+		summarizeBy: none
+		sourceColumn: Pipeline Y
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sales All' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Sales All_Sheet" = Source{[Item="Sales All",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Sales All_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product Group", type any}, {"Product Type", type any}, {"Revenue target 24/25", type any}, {"Revenue target GM%", type any}, {"Order Intake Target volume", type any}, {"Order Intake Target GM%", type any}, {"OPL23 OI volume", type any}, {"OPL23 OI GM", type any}, {"OI YTD 22/23", type any}, {"OI YTD GM%", type any}, {"OI Estimate 22/23", type any}, {"OI Estimate GM%", type any}, {"OI Budget 23/24", type any}, {"OI Budget GM%", type any}, {"Revenue Covered by Backlog", type any}, {"Pipeline X", type any}, {"Pipeline Y", type any}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

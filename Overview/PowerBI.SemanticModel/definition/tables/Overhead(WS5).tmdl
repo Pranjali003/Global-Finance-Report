@@ -1,0 +1,80 @@
+table Overhead(WS5)
+	lineageTag: 2a3ad781-64e4-41d3-8f2d-471fa2b1bc99
+
+	column Column1
+		dataType: string
+		lineageTag: f567fe92-c40a-4a67-8897-928bcb3c4f6d
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Total'
+		dataType: int64
+		formatString: 0
+		lineageTag: 90b07162-7fc3-499f-ad8b-77af5c8f7b48
+		summarizeBy: sum
+		sourceColumn: Target Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Ratio'
+		dataType: int64
+		formatString: 0
+		lineageTag: 387fb892-2d14-41c0-9617-19b0925b6fa4
+		summarizeBy: sum
+		sourceColumn: Target Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actuals Total'
+		dataType: int64
+		formatString: 0
+		lineageTag: ce907119-dd2d-4f91-a765-77eb88f1f150
+		summarizeBy: none
+		sourceColumn: Actuals Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actuals Ratio'
+		dataType: int64
+		formatString: 0
+		lineageTag: c55801f6-fe74-4511-816a-65d5a2851d37
+		summarizeBy: sum
+		sourceColumn: Actuals Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimation Total'
+		dataType: int64
+		formatString: 0
+		lineageTag: ae9a8ed6-820a-4317-b3a9-5e0a36ffff23
+		summarizeBy: sum
+		sourceColumn: Estimation Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimation Ratio'
+		dataType: int64
+		formatString: 0
+		lineageTag: 252badbd-aa0f-452d-9d80-ac0a76a4d45d
+		summarizeBy: sum
+		sourceColumn: Estimation Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Overhead(WS5) = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Overhead(WS5)_Sheet" = Source{[Item="Overhead(WS5)",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Overhead(WS5)_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Column1", type text}, {"Target Total", Int64.Type}, {"Target Ratio", Int64.Type}, {"Actuals Total", Int64.Type}, {"Actuals Ratio", Int64.Type}, {"Estimation Total", Int64.Type}, {"Estimation Ratio", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

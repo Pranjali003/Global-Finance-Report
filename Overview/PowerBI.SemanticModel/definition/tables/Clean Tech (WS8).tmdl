@@ -1,0 +1,135 @@
+table 'Clean Tech (WS8)'
+	lineageTag: 616bd3fc-75a6-494e-b870-2ce87e6527fc
+
+	column 'Product Group'
+		dataType: string
+		lineageTag: 2222596b-fd40-460b-ab98-016805d61373
+		summarizeBy: none
+		sourceColumn: Product Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'target 24/25'
+		dataType: int64
+		formatString: 0
+		lineageTag: e485c146-1d2a-45db-80f3-1bdb191d6b18
+		summarizeBy: sum
+		sourceColumn: target 24/25
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target GM%'
+		dataType: double
+		lineageTag: 8fb7cb69-2587-4edc-8bf2-1ee8f9035ce8
+		summarizeBy: sum
+		sourceColumn: Target GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'YTD 22/23'
+		dataType: int64
+		formatString: 0
+		lineageTag: 770a0935-d3a6-4383-a702-90dd4e32762f
+		summarizeBy: sum
+		sourceColumn: YTD 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimate 22/23'
+		dataType: int64
+		formatString: 0
+		lineageTag: c7da5a6a-a189-43aa-b86b-60fb5502abfa
+		summarizeBy: sum
+		sourceColumn: Estimate 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimate GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3517ad80-befd-4bb1-9b9a-282e55b4722b
+		summarizeBy: sum
+		sourceColumn: Estimate GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Budget 23/24'
+		dataType: int64
+		formatString: 0
+		lineageTag: 64a907f9-0d32-4f01-838d-95b1f6691ca1
+		summarizeBy: sum
+		sourceColumn: Budget 23/24
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Budget GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: cf3d87e8-fa95-4471-90af-d38e9d3bced7
+		summarizeBy: sum
+		sourceColumn: Budget GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline X'
+		dataType: int64
+		formatString: 0
+		lineageTag: 74042e44-915b-48a8-88ca-8f1a4fc04311
+		summarizeBy: sum
+		sourceColumn: Pipeline X
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline X GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: ee151496-6c34-4663-8379-5bc0928f87c4
+		summarizeBy: sum
+		sourceColumn: Pipeline X GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Y'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9cd529a4-80a9-44ff-be3f-bf4773830be1
+		summarizeBy: sum
+		sourceColumn: Pipeline Y
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Y GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: c0d8b097-5157-4dce-a2a4-85a13d730c69
+		summarizeBy: sum
+		sourceColumn: Pipeline Y GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Covered by Backlog'
+		dataType: int64
+		formatString: 0
+		lineageTag: e0bf3c6d-7341-4e23-9014-e9b93a1dc42c
+		summarizeBy: sum
+		sourceColumn: Covered by Backlog
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Clean Tech (WS8)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Clean Tech (WS8)_Sheet" = Source{[Item="Clean Tech (WS8)",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Clean Tech (WS8)_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product Group", type text}, {"target 24/25", Int64.Type}, {"Target GM%", type number}, {"YTD 22/23", Int64.Type}, {"Estimate 22/23", Int64.Type}, {"Estimate GM%", Int64.Type}, {"Budget 23/24", Int64.Type}, {"Budget GM%", Int64.Type}, {"Pipeline X", Int64.Type}, {"Pipeline X GM%", Int64.Type}, {"Pipeline Y", Int64.Type}, {"Pipeline Y GM%", Int64.Type}, {"Covered by Backlog", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

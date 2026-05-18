@@ -1,0 +1,116 @@
+table 'Sales Per Color'
+	lineageTag: 2156f676-ef21-4365-b099-689f82e11e8d
+
+	column Color
+		dataType: string
+		lineageTag: 9bbdd28a-813a-458c-8b65-a9d804b7f7b2
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Goals 24/25'
+		dataType: string
+		lineageTag: c50e8194-d500-4173-8f59-64e068396c9f
+		summarizeBy: none
+		sourceColumn: Sales Goals 24/25
+
+		annotation SummarizationSetBy = Automatic
+
+	column GM%
+		dataType: double
+		lineageTag: 3800e22b-776d-4892-a443-a0c5a441d74b
+		summarizeBy: sum
+		sourceColumn: GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Order Intake 23/24'
+		dataType: string
+		lineageTag: 0520964c-14cd-4999-9152-98038850bc18
+		summarizeBy: none
+		sourceColumn: Order Intake 23/24
+
+		annotation SummarizationSetBy = Automatic
+
+	column GM%_1
+		dataType: double
+		lineageTag: 8dce0488-3ada-4479-b360-46a0a9f35b59
+		summarizeBy: sum
+		sourceColumn: GM%_1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'OI YTD Actual'
+		dataType: string
+		lineageTag: 636bd3f6-73bd-4fd2-80e8-1d93180df2c5
+		summarizeBy: none
+		sourceColumn: OI YTD Actual
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI GM%'
+		dataType: double
+		lineageTag: 306a764b-11f1-473c-b2d6-41ae7edc8280
+		summarizeBy: sum
+		sourceColumn: OI GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'OI YTD Pipeline X'
+		dataType: string
+		lineageTag: 804bad18-38ed-49a1-9b6a-6b9e8505c734
+		summarizeBy: none
+		sourceColumn: OI YTD Pipeline X
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI GM% '
+		dataType: double
+		lineageTag: 66cb45eb-f79f-472c-b1a7-54b000eb62a3
+		summarizeBy: sum
+		sourceColumn: "OI GM% "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'OI YTD Pipeline Y'
+		dataType: string
+		lineageTag: daeb69c0-33dc-4f75-871c-7b86b0e894d3
+		summarizeBy: none
+		sourceColumn: OI YTD Pipeline Y
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI GM% _2'
+		dataType: double
+		lineageTag: aadd3fe7-9006-43a4-ac30-6728caa32329
+		summarizeBy: sum
+		sourceColumn: OI GM% _2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Sales Per Color' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Sales Per Color_Sheet" = Source{[Item="Sales Per Color",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Sales Per Color_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Color", type text}, {"Sales Goals 24/25", type text}, {"GM%", type number}, {"Order Intake 23/24", type text}, {"GM%_1", type number}, {"OI YTD Actual", type text}, {"OI GM%", type number}, {"OI YTD Pipeline X", type text}, {"OI GM% ", type number}, {"OI YTD Pipeline Y", type text}, {"OI GM% _2", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

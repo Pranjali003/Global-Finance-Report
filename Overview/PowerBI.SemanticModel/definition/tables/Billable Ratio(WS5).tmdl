@@ -1,0 +1,57 @@
+table 'Billable Ratio(WS5)'
+	lineageTag: 653dba7d-0aa4-4fa8-9f46-66e76f02294c
+
+	column Column1
+		dataType: string
+		lineageTag: ca3c1df1-f8d6-446c-a878-034a4c951723
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target ratio'
+		dataType: double
+		lineageTag: 0fac2413-5024-48b0-a51d-3b8548bc027d
+		summarizeBy: sum
+		sourceColumn: Target ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Actuals
+		dataType: double
+		lineageTag: f1a0392d-c6a5-45e8-a9e1-261b68e2d779
+		summarizeBy: sum
+		sourceColumn: Actuals
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Estimation
+		dataType: double
+		lineageTag: 4bc879f8-f3ed-4d15-8eb4-9233ee069e1e
+		summarizeBy: sum
+		sourceColumn: Estimation
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Billable Ratio(WS5)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Billable Ratio(WS5)_Sheet" = Source{[Item="Billable Ratio(WS5)",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Billable Ratio(WS5)_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Column1", type text}, {"Target ratio", type number}, {"Actuals", type number}, {"Estimation", type number}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"Target ratio", Percentage.Type}, {"Actuals", Percentage.Type}, {"Estimation", Percentage.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

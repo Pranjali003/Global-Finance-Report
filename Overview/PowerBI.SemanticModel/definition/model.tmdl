@@ -1,0 +1,43 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Actual Sales","Billable Ratio(WS5)","Clean Tech (WS8)","Cost and Hours per Month","CRM Data","OI GM as sold","OI GM Green Ammonia (WS7)","OU CP (WS4)","OU PP (WS4)","Overhead(WS5)","Overheads","Page Access","Project execution (WS3)","Proposal Cost","Sales All","Sales Fixed","Sales Grey","Sales HMR","Sales Per Color","Target Sales","Top 10 Pipeline"]
+
+annotation PBI_ProTooling = ["MCP-PBIModeling"]
+
+ref table 'Actual Sales'
+ref table 'Billable Ratio(WS5)'
+ref table 'Clean Tech (WS8)'
+ref table 'Cost and Hours per Month'
+ref table DateTableTemplate_d1820232-7e85-4c52-8422-95e80a293ca5
+ref table LocalDateTable_d178dda3-334a-420b-ba8e-3f6f12963187
+ref table 'CRM Data'
+ref table LocalDateTable_51eb3867-371c-499f-bf73-26725cc9f7a1
+ref table LocalDateTable_8ed056c2-cc44-4010-be76-aae0393a93c4
+ref table 'OI GM as sold'
+ref table 'OI GM Green Ammonia (WS7)'
+ref table 'OU CP (WS4)'
+ref table 'OU PP (WS4)'
+ref table Overhead(WS5)
+ref table Overheads
+ref table 'Page Access'
+ref table 'Project execution (WS3)'
+ref table 'Proposal Cost'
+ref table 'Sales All'
+ref table 'Sales Fixed'
+ref table 'Sales Grey'
+ref table 'Sales HMR'
+ref table 'Sales Per Color'
+ref table 'Target Sales'
+ref table 'Top 10 Pipeline'
+ref table LocalDateTable_9d8b6868-8403-4f4c-972b-78332c36ceec
+
+ref cultureInfo en-US
+

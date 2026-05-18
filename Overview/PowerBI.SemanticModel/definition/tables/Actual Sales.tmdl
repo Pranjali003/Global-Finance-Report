@@ -1,0 +1,27 @@
+table 'Actual Sales'
+	lineageTag: ced03fd8-d28d-4935-a03d-85256af667af
+
+	column 'Actual Sales'
+		dataType: string
+		lineageTag: 5f7b5b26-b6c1-44cf-9c8b-728b1fd3ed62
+		summarizeBy: none
+		sourceColumn: Actual Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Actual Sales' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Actual Sales_Sheet" = Source{[Item="Actual Sales",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Actual Sales_Sheet",{{"Column1", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Actual Sales", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

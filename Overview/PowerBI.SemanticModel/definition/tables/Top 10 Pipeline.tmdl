@@ -1,0 +1,98 @@
+table 'Top 10 Pipeline'
+	lineageTag: e2469183-a4c5-43dd-9f7a-fa2a6b841ee2
+
+	/// Total combined pipeline from Top 10
+	measure 'Top 10 Pipeline Volume' = SUM('Top 10 Pipeline'[OI Volume])
+		formatString: #,0
+		displayFolder: 04 | Pipeline
+		lineageTag: 3ca4cb0d-850a-43d4-8182-dc15bf923952
+
+	/// Weighted average Go probability from Top 10 pipeline
+	measure 'Avg Go Probability' = DIVIDE(SUMX('Top 10 Pipeline', 'Top 10 Pipeline'[OI Volume] * 'Top 10 Pipeline'[go]), SUM('Top 10 Pipeline'[OI Volume]), 0)
+		formatString: 0.0%
+		displayFolder: 04 | Pipeline
+		lineageTag: c3310b02-826c-46d7-b983-e59c0148d221
+
+	/// Risk-weighted pipeline volume (Go x Volume)
+	measure 'Risk-Weighted Pipeline' = SUMX('Top 10 Pipeline', 'Top 10 Pipeline'[OI Volume] * 'Top 10 Pipeline'[go])
+		formatString: #,0
+		displayFolder: 04 | Pipeline
+		lineageTag: a32ddefd-b1b0-473e-b339-8567dec300e3
+
+	column Projects
+		dataType: string
+		lineageTag: 779f392f-64a0-436e-811c-262b0c50d1d5
+		summarizeBy: none
+		sourceColumn: Projects
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6875504c-3cb4-4848-b125-f6a4f82c92ef
+		summarizeBy: none
+		sourceColumn: OI Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c88e444a-8f25-4889-b151-6446e9264050
+		summarizeBy: none
+		sourceColumn: OI date
+
+		variation Variation
+			isDefault
+			relationship: e8d82e05-de6f-46ee-93c4-421516a2e15c
+			defaultHierarchy: LocalDateTable_9d8b6868-8403-4f4c-972b-78332c36ceec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column go
+		dataType: double
+		lineageTag: 86931dc3-fc40-434e-bbe3-f1fbc2f43cff
+		summarizeBy: sum
+		sourceColumn: go
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'get '
+		dataType: double
+		lineageTag: 4b7f4145-24b7-48d8-9c8c-7e058eb03ecc
+		summarizeBy: sum
+		sourceColumn: "get "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Legal Entity'
+		dataType: string
+		lineageTag: 522ce67d-0140-47aa-bda1-b020f04d2770
+		summarizeBy: none
+		sourceColumn: Legal Entity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Top 10 Pipeline' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Top 10 Pipeline_Sheet" = Source{[Item="Top 10 Pipeline",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Top 10 Pipeline_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Projects", type text}, {"OI Volume", Int64.Type}, {"OI date", type date}, {"go", type number}, {"get ", type number}, {"Legal Entity", type text}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"go", Percentage.Type}, {"get ", Percentage.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

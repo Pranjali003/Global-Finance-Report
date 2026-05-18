@@ -1,0 +1,102 @@
+table Overheads
+	lineageTag: 0128e661-7786-432b-8a4b-cd19a35e9150
+
+	/// Total Overhead Actuals
+	measure 'Total Overhead Actuals' = SUM('Overheads'[Actuals Total])
+		formatString: #,0
+		displayFolder: 02 | Cost & Budget
+		lineageTag: b6505e8c-f45c-426d-bbd4-f3eb641a559a
+
+	/// Overhead Actual Ratio
+	measure 'Overhead Actuals Ratio' = AVERAGE('Overheads'[Actuals Ratio])
+		formatString: 0.0%
+		displayFolder: 02 | Cost & Budget
+		lineageTag: 0aa0ce7e-833e-4a17-9efa-fac1bb44951c
+
+	/// Overhead Target Ratio
+	measure 'Overhead Target Ratio' = AVERAGE('Overheads'[Target Ratio])
+		formatString: 0.0%
+		displayFolder: 02 | Cost & Budget
+		lineageTag: 5457bd63-7795-497f-9df2-a82c9232b1e5
+
+	column Overheads
+		dataType: string
+		lineageTag: de260655-86c4-442f-abdc-01a1d5fb465a
+		summarizeBy: none
+		sourceColumn: Overheads
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Total'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f66f19f-f59f-45e0-82ea-95a6785bd45f
+		summarizeBy: sum
+		sourceColumn: Target Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Ratio'
+		dataType: double
+		lineageTag: 112adf38-40c9-41e2-800f-120a059bbddd
+		summarizeBy: sum
+		sourceColumn: Target Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Actuals Total'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b216217-7001-467e-bb6f-24a399cb5e23
+		summarizeBy: none
+		sourceColumn: Actuals Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actuals Ratio'
+		dataType: double
+		lineageTag: e78e18eb-68bc-4a37-98a2-d4d3dff44218
+		summarizeBy: sum
+		sourceColumn: Actuals Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Estimation Total'
+		dataType: int64
+		formatString: 0
+		lineageTag: c488e516-26e9-41dc-a341-dda57e630d58
+		summarizeBy: sum
+		sourceColumn: Estimation Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimation Ratio'
+		dataType: double
+		lineageTag: 596ada27-119c-4692-8c6c-44d492afc517
+		summarizeBy: sum
+		sourceColumn: Estimation Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Overheads = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    Overheads_Sheet = Source{[Item="Overheads",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Overheads_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Overheads", type text}, {"Target Total", Int64.Type}, {"Target Ratio", type number}, {"Actuals Total", Int64.Type}, {"Actuals Ratio", type number}, {"Estimation Total", Int64.Type}, {"Estimation Ratio", type number}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"Target Ratio", Percentage.Type}, {"Actuals Ratio", Percentage.Type}, {"Estimation Ratio", Percentage.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

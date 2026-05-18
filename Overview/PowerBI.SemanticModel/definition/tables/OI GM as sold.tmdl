@@ -1,0 +1,134 @@
+table 'OI GM as sold'
+	lineageTag: 854c10b1-f37f-4d58-9913-8f5e5d2b9e03
+
+	/// Overall GM% from OI GM as sold (target perspective)
+	measure 'OI Target GM% (Sold)' = DIVIDE(SUMX('OI GM as sold', 'OI GM as sold'[OI volume] * 'OI GM as sold'[Target GM%]), SUM('OI GM as sold'[OI volume]), 0) / 100
+		formatString: 0.0%
+		displayFolder: 03 | GM & Margin
+		lineageTag: 9c9a9464-cc6d-4bae-b98c-fc4ba70fefbd
+
+	/// YTD GM% from OI actuals
+	measure 'OI YTD GM%' = DIVIDE(SUMX('OI GM as sold', 'OI GM as sold'[OI volume] * 'OI GM as sold'[YTD GM%]), SUM('OI GM as sold'[OI volume]), 0) / 100
+		formatString: 0.0%
+		displayFolder: 03 | GM & Margin
+		lineageTag: 6c21e205-4568-423a-bed5-8b1bc44bce3b
+
+	column 'Product Group'
+		dataType: string
+		lineageTag: 0b1efdbe-76ae-4aad-9a5f-be73b8138684
+		summarizeBy: none
+		sourceColumn: Product Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: a6c65a68-910f-4da2-bc24-6b71002d7ab0
+		summarizeBy: sum
+		sourceColumn: OI volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target GM%'
+		dataType: double
+		lineageTag: 35c28b2c-ec43-44e4-af2d-f7c30e628445
+		summarizeBy: sum
+		sourceColumn: Target GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPL23
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e768303-984d-49ea-ab04-5b90dd9c1efd
+		summarizeBy: sum
+		sourceColumn: OPL23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OPL23 GM%'
+		dataType: double
+		lineageTag: aaef30be-bef3-4f06-99f4-0fa8d06d537b
+		summarizeBy: sum
+		sourceColumn: OPL23 GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'YTD 22/23'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3825f08e-46db-47db-b21b-74123c476ae4
+		summarizeBy: sum
+		sourceColumn: YTD 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'YTD GM%'
+		dataType: double
+		lineageTag: fe809cdc-309a-4993-87d2-3da5c09134dd
+		summarizeBy: sum
+		sourceColumn: YTD GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Pipeline X'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c0e43b0-684f-4c33-b9f4-9d795c62f5fc
+		summarizeBy: sum
+		sourceColumn: Pipeline X
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline X GM%'
+		dataType: double
+		lineageTag: 6b72df06-be4e-4526-8f12-bf2f2677faa3
+		summarizeBy: sum
+		sourceColumn: Pipeline X GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Pipeline Y'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c6dce85-27ff-4ea5-ba51-9b3468e1b592
+		summarizeBy: sum
+		sourceColumn: Pipeline Y
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Y GM%'
+		dataType: double
+		lineageTag: 7b490a83-0f37-435e-bd7e-cd26f37c1d4c
+		summarizeBy: sum
+		sourceColumn: Pipeline Y GM%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'OI GM as sold' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"OI GM as sold_Sheet" = Source{[Item="OI GM as sold",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"OI GM as sold_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product Group", type text}, {"OI volume", Int64.Type}, {"Target GM%", type number}, {"OPL23", Int64.Type}, {"OPL23 GM%", type number}, {"YTD 22/23", Int64.Type}, {"YTD GM%", type number}, {"Pipeline X", Int64.Type}, {"Pipeline X GM%", type number}, {"Pipeline Y", Int64.Type}, {"Pipeline Y GM%", type number}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"Target GM%", Percentage.Type}, {"OPL23 GM%", Percentage.Type}, {"YTD GM%", Percentage.Type}, {"Pipeline X GM%", Percentage.Type}, {"Pipeline Y GM%", Percentage.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

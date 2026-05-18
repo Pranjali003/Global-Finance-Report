@@ -1,0 +1,27 @@
+table 'Target Sales'
+	lineageTag: 4a0951f2-a768-4230-ae73-cdea6f31c3cc
+
+	column 'Target Sales'
+		dataType: string
+		lineageTag: ed01b43f-5946-4b31-ad8e-96fc5c8c8608
+		summarizeBy: none
+		sourceColumn: Target Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Target Sales' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Target Sales_Sheet" = Source{[Item="Target Sales",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Target Sales_Sheet",{{"Column1", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Target Sales", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

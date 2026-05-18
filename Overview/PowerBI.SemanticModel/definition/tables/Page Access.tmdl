@@ -1,0 +1,35 @@
+table 'Page Access'
+	lineageTag: 39e29786-8547-4859-bdf0-f268edf7c009
+
+	column User_id
+		dataType: string
+		lineageTag: fc8b9155-8aa7-4811-99f8-dcee91c0c8aa
+		summarizeBy: none
+		sourceColumn: User_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Page
+		dataType: string
+		lineageTag: d7a1abd7-fad1-48e4-babf-7f7f235e493d
+		summarizeBy: none
+		sourceColumn: Page
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Access' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Page Access_Sheet" = Source{[Item="Page Access",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Page Access_Sheet",{{"Column1", type text}, {"Column2", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"User_id", type text}, {"Page", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

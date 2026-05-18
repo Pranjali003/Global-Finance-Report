@@ -1,0 +1,98 @@
+table 'OI GM Green Ammonia (WS7)'
+	lineageTag: 7c65637f-6c8e-4e96-bcaa-b0b9445dc6c0
+
+	column 'Product Group'
+		dataType: string
+		lineageTag: f60904f5-cf2f-4b2d-8c87-3746ce034572
+		summarizeBy: none
+		sourceColumn: Product Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: a96fb9a3-1d56-4571-a7b0-a25f8441648a
+		summarizeBy: none
+		sourceColumn: OI volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: d7b2f4dd-9fef-497f-8113-c8dfeaf8a916
+		summarizeBy: none
+		sourceColumn: Target GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'YTD 22/23'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e4c6623-7825-4dff-ab48-38673a405364
+		summarizeBy: none
+		sourceColumn: YTD 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'YTD GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c31c0d5-4941-496d-85f8-e34da39d4063
+		summarizeBy: none
+		sourceColumn: YTD GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline X'
+		dataType: int64
+		formatString: 0
+		lineageTag: c6c7f837-d791-458f-8fa7-0395a2c82119
+		summarizeBy: none
+		sourceColumn: Pipeline X
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline X GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5dd09cd0-76aa-4d76-8413-ad03d2a3bfa6
+		summarizeBy: none
+		sourceColumn: Pipeline X GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Y'
+		dataType: int64
+		formatString: 0
+		lineageTag: 50b80552-8ae4-4e53-b62d-be62f1b7963f
+		summarizeBy: none
+		sourceColumn: Pipeline Y
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Y GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e0e5034-6bfb-4e59-a357-bc1cc8f908c1
+		summarizeBy: none
+		sourceColumn: Pipeline Y GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'OI GM Green Ammonia (WS7)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"OI GM Green Ammonia (WS7)_Sheet" = Source{[Item="OI GM Green Ammonia (WS7)",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"OI GM Green Ammonia (WS7)_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product Group", type text}, {"OI volume", Int64.Type}, {"Target GM%", Int64.Type}, {"YTD 22/23", Int64.Type}, {"YTD GM%", Int64.Type}, {"Pipeline X", Int64.Type}, {"Pipeline X GM%", Int64.Type}, {"Pipeline Y", Int64.Type}, {"Pipeline Y GM%", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

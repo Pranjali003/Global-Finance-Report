@@ -1,0 +1,145 @@
+table 'Cost and Hours per Month'
+	lineageTag: 930a97a4-c71f-47b8-aafb-c1c04dd20a43
+
+	/// Total Actual Cost from Cost and Hours
+	measure 'Total Actual Cost' = SUM('Cost and Hours per Month'[Total Cost])
+		formatString: #,0
+		displayFolder: 02 | Cost & Budget
+		lineageTag: ae3e9a25-ad2e-423c-8daf-ae5f628921d6
+
+	/// Total Budget Cost from Cost and Hours
+	measure 'Total Budget Cost' = SUM('Cost and Hours per Month'[Budget Cost])
+		formatString: #,0
+		displayFolder: 02 | Cost & Budget
+		lineageTag: be8ded40-8b43-4952-93ae-ac186f7985d6
+
+	/// Cost variance vs Budget (negative = overspend)
+	measure 'Cost Variance vs Budget' = SUM('Cost and Hours per Month'[Budget Cost]) - SUM('Cost and Hours per Month'[Total Cost])
+		formatString: #,0
+		displayFolder: 02 | Cost & Budget
+		lineageTag: 0b08809f-b8f9-4f93-aa54-ce81efcfbc67
+
+	/// Cost achievement vs Budget as %
+	measure 'Cost vs Budget %' = DIVIDE(SUM('Cost and Hours per Month'[Total Cost]), SUM('Cost and Hours per Month'[Budget Cost]), 0)
+		formatString: 0.0%
+		displayFolder: 02 | Cost & Budget
+		lineageTag: 58de0670-6d4f-4f1a-ba03-a74a89e09d15
+
+	/// Total External Costs
+	measure 'Total External Cost' = SUM('Cost and Hours per Month'[External Costs])
+		formatString: #,0
+		displayFolder: 02 | Cost & Budget
+		lineageTag: 86336392-68c1-4ca1-8c3d-51124c765aa9
+
+	/// Total Other Internal Costs
+	measure 'Total Internal Cost' = SUM('Cost and Hours per Month'[Other internal costs])
+		formatString: #,0
+		displayFolder: 02 | Cost & Budget
+		lineageTag: 1c6c18c1-c311-42d3-b2de-97571b238188
+
+	/// RAG flag for cost overspend
+	measure 'Cost RAG Status' = VAR ratio = DIVIDE(SUM('Cost and Hours per Month'[Total Cost]), SUM('Cost and Hours per Month'[Budget Cost]), 0) RETURN IF(ratio > 1.05, "🔴 Overspend", IF(ratio > 1, "🟡 Watch", "🟢 Under Budget"))
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: b396cce9-fb1c-48d1-b6dd-c97541d79375
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b1679de3-bac9-4d99-8c5f-6da68bb2c185
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 19245748-e3f2-46b6-8a75-28cbf04a61ce
+			defaultHierarchy: LocalDateTable_d178dda3-334a-420b-ba8e-3f6f12963187.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Workstream
+		dataType: string
+		lineageTag: 50779063-d773-44bf-b850-6f81ba2969d0
+		summarizeBy: none
+		sourceColumn: Workstream
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 902efa33-bdf8-410e-8817-39aca0f98cf5
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Cost'
+		dataType: int64
+		formatString: 0
+		lineageTag: b161e390-ce89-41fe-96b1-28c45a4e66c1
+		summarizeBy: sum
+		sourceColumn: Total Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Hours'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e2b3abc-8123-4ed1-8516-1e4bdc73f2c8
+		summarizeBy: sum
+		sourceColumn: Total Hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other internal costs'
+		dataType: int64
+		formatString: 0
+		lineageTag: ac13a606-c3fc-454d-9928-8d6b37c13fd9
+		summarizeBy: sum
+		sourceColumn: Other internal costs
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External Costs'
+		dataType: int64
+		formatString: 0
+		lineageTag: 580011e1-6b87-4de0-a8c7-e406ede0bec4
+		summarizeBy: sum
+		sourceColumn: External Costs
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Budget Cost'
+		dataType: int64
+		formatString: 0
+		lineageTag: c5e3fc38-f563-4807-a8fb-bd3f42fa0e66
+		summarizeBy: sum
+		sourceColumn: Budget Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Budget Hours'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a3a3524-1617-4910-8bbd-6fba86980c58
+		summarizeBy: sum
+		sourceColumn: Budget Hours
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Cost and Hours per Month' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Cost and Hours per Month_Sheet" = Source{[Item="Cost and Hours per Month",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Cost and Hours per Month_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Workstream", type text}, {"Location", type text}, {"Total Cost", Int64.Type}, {"Total Hours", Int64.Type}, {"Other internal costs", Int64.Type}, {"External Costs", Int64.Type}, {"Budget Cost", Int64.Type}, {"Budget Hours", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,163 @@
+table 'Project execution (WS3)'
+	lineageTag: bfc98314-5a5c-4f6b-a00a-c93616340786
+
+	/// Total GM value from Project Execution
+	measure 'Total GM' = SUM('Project execution (WS3)'[GM])
+		formatString: #,0
+		displayFolder: 03 | GM & Margin
+		lineageTag: be8de0dd-4ad4-49b5-9484-bb18a824c0d9
+
+	/// Weighted average GM% across all projects
+	measure 'Overall GM%' = DIVIDE(SUM('Project execution (WS3)'[GM]), SUM('Project execution (WS3)'[Volume]), 0)
+		formatString: 0.0%
+		displayFolder: 03 | GM & Margin
+		lineageTag: 116d6a6a-c86f-4eb7-a32b-f92a29febefa
+
+	/// Total Project Volume from execution table
+	measure 'Total Project Volume' = SUM('Project execution (WS3)'[Volume])
+		formatString: #,0
+		displayFolder: 03 | GM & Margin
+		lineageTag: 45fa30c8-c787-461c-8f23-cf15b111a507
+
+	/// GM% delta: Actual vs Target (margin erosion indicator)
+	measure 'GM% Erosion Indicator' = DIVIDE(SUM('Project execution (WS3)'[GM]), SUM('Project execution (WS3)'[Volume]), 0) - DIVIDE(SUMX('OI GM as sold', 'OI GM as sold'[OI volume] * 'OI GM as sold'[Target GM%]), SUM('OI GM as sold'[OI volume]), 0) / 100
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 03 | GM & Margin
+		lineageTag: 12f4239c-8291-4aa2-bd58-fe9765ef173a
+
+	/// Total TER value from project execution
+	measure 'Total TER' = SUM('Project execution (WS3)'[TER ])
+		formatString: #,0
+		displayFolder: 03 | GM & Margin
+		lineageTag: 6f50bd40-c05a-4bfe-873e-6d00563c0d0f
+
+	/// TER as % of Volume
+	measure 'TER %' = AVERAGE('Project execution (WS3)'[TER in % of])
+		formatString: 0.0%
+		displayFolder: 03 | GM & Margin
+		lineageTag: 029f0585-7fff-49bc-984d-fa80234d5f81
+
+	/// RAG flag for GM% erosion
+	measure 'GM RAG Status' = VAR erosion = DIVIDE(SUM('Project execution (WS3)'[GM]), SUM('Project execution (WS3)'[Volume]), 0) - DIVIDE(SUMX('OI GM as sold', 'OI GM as sold'[OI volume] * 'OI GM as sold'[Target GM%]), SUM('OI GM as sold'[OI volume]), 0) / 100 RETURN IF(erosion < -0.03, "🔴 Eroding", IF(erosion < 0, "🟡 Watch", "🟢 Healthy"))
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: 17092222-55b8-40a0-921d-ad5d86f2a6af
+
+	column Projects
+		dataType: string
+		lineageTag: 29c3f9d8-d2f4-496c-9fee-10b674628457
+		summarizeBy: none
+		sourceColumn: Projects
+
+		annotation SummarizationSetBy = Automatic
+
+	column Volume
+		dataType: int64
+		formatString: 0
+		lineageTag: 674d486b-1974-4ef8-8e71-ec1bc237eace
+		summarizeBy: sum
+		sourceColumn: Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GM in %'
+		dataType: double
+		lineageTag: fe0a9c67-e6fa-4581-abf4-746effd341d5
+		summarizeBy: sum
+		sourceColumn: GM in %
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GM
+		dataType: int64
+		formatString: 0
+		lineageTag: abb029c6-1117-45dd-b10b-4a7c0980d3ae
+		summarizeBy: sum
+		sourceColumn: GM
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TER '
+		dataType: int64
+		formatString: 0
+		lineageTag: e3ed3e50-97a7-45c3-8447-1c296bc819da
+		summarizeBy: sum
+		sourceColumn: "TER "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TER in % of'
+		dataType: double
+		lineageTag: 7d91ce9a-d5bc-4f9d-98dd-2af3f475c9da
+		summarizeBy: sum
+		sourceColumn: TER in % of
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GM in %2'
+		dataType: double
+		lineageTag: 4772b2b4-6381-43ff-8a00-98a197fb87ed
+		summarizeBy: sum
+		sourceColumn: GM in %2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Improvement 3%'
+		dataType: double
+		lineageTag: 549688f3-674e-4326-b33d-b6b42e99494e
+		summarizeBy: sum
+		sourceColumn: Improvement 3%
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Measures DI 1-3'
+		dataType: int64
+		formatString: 0
+		lineageTag: 187cd211-1c86-4026-b19c-94d7d7bd1f43
+		summarizeBy: sum
+		sourceColumn: Measures DI 1-3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measures DI4'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f4432c8-fbc1-48eb-9725-f85ca48d7dcd
+		summarizeBy: sum
+		sourceColumn: Measures DI4
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DI5 Effect'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5f61c3d7-faeb-4229-b4ba-321262973b4e
+		summarizeBy: sum
+		sourceColumn: DI5 Effect
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Project execution (WS3)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Project execution (WS3)_Sheet" = Source{[Item="Project execution (WS3)",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Project execution (WS3)_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Projects", type text}, {"Volume", Int64.Type}, {"GM in %", type number}, {"GM", Int64.Type}, {"TER ", Int64.Type}, {"TER in % of", type number}, {"GM in %2", type number}, {"Improvement 3%", Int64.Type}, {"Measures DI 1-3", Int64.Type}, {"Measures DI4", Int64.Type}, {"DI5 Effect", Int64.Type}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"GM in %", Percentage.Type}, {"TER in % of", Percentage.Type}, {"GM in %2", Percentage.Type}, {"Improvement 3%", Percentage.Type}}),
+				    #"Divided Column" = Table.TransformColumns(#"Changed Type1", {{"Improvement 3%", each _ / 100, Percentage.Type}})
+				in
+				    #"Divided Column"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

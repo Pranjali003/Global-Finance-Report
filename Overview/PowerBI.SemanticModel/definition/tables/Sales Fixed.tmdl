@@ -1,0 +1,106 @@
+table 'Sales Fixed'
+	lineageTag: 1c3f64ea-11fb-4c87-852c-820ddf499627
+
+	/// Total Order Intake Target Volume across all product groups
+	measure 'Total OI Target Volume' = SUM('Sales Fixed'[Order Intake Target volume])
+		formatString: #,0
+		displayFolder: 01 | Order Intake
+		lineageTag: c2175133-d3e3-4831-bda1-fe79fc5427ca
+
+	/// Total Revenue Target 24/25
+	measure 'Total Revenue Target' = SUM('Sales Fixed'[Revenue target 24/25])
+		formatString: #,0
+		displayFolder: 01 | Order Intake
+		lineageTag: 2ba70093-82eb-48d5-b4ec-d188d5865caf
+
+	/// Average Order Intake Target GM%
+	measure 'OI Target GM%' = AVERAGE('Sales Fixed'[Order Intake Target GM%])
+		formatString: 0.0%
+		displayFolder: 01 | Order Intake
+		lineageTag: d06c1d23-9867-4bd5-8f71-92d2f9b77154
+
+	column 'Product Group'
+		dataType: string
+		lineageTag: b5eeec0f-278b-4e32-9da5-f4be7eb600fd
+		summarizeBy: none
+		sourceColumn: Product Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Type'
+		dataType: string
+		lineageTag: 26ce6b11-6ed3-41be-b9f2-c2d18ad284a7
+		summarizeBy: none
+		sourceColumn: Product Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue target 24/25'
+		dataType: int64
+		formatString: 0
+		lineageTag: bf007267-170e-40da-8e0c-6190fa388989
+		summarizeBy: none
+		sourceColumn: Revenue target 24/25
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue target GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: db868526-e0f3-42a7-b7a7-c83608d27ede
+		summarizeBy: none
+		sourceColumn: Revenue target GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Intake Target volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: 30ed3b69-2111-4420-a70f-781692fcfd91
+		summarizeBy: none
+		sourceColumn: Order Intake Target volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Intake Target GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: ca223f2c-1760-4bf2-9d90-eea187deee70
+		summarizeBy: none
+		sourceColumn: Order Intake Target GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OPL23 OI volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1bbb1b8d-9cb7-445f-97d2-43546422d8d3
+		summarizeBy: none
+		sourceColumn: OPL23 OI volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OPL23 OI GM'
+		dataType: int64
+		formatString: 0
+		lineageTag: d4cf2df2-67c4-4719-9ea8-ada82b189a57
+		summarizeBy: none
+		sourceColumn: OPL23 OI GM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sales Fixed' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Sales Fixed_Sheet" = Source{[Item="Sales Fixed",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Sales Fixed_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product Group", type text}, {"Product Type", type text}, {"Revenue target 24/25", Int64.Type}, {"Revenue target GM%", Int64.Type}, {"Order Intake Target volume", Int64.Type}, {"Order Intake Target GM%", Int64.Type}, {"OPL23 OI volume", Int64.Type}, {"OPL23 OI GM", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

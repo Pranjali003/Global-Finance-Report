@@ -1,0 +1,70 @@
+relationship 19245748-e3f2-46b6-8a75-28cbf04a61ce
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Cost and Hours per Month'.Date
+	toColumn: LocalDateTable_d178dda3-334a-420b-ba8e-3f6f12963187.Date
+
+relationship 23b5a78f-20ba-491d-aca0-5e012f5569ee
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'CRM Data'.'OI date'
+	toColumn: LocalDateTable_51eb3867-371c-499f-bf73-26725cc9f7a1.Date
+
+relationship 4f42b9c6-78d2-45b7-aa96-2c7067948d39
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'CRM Data'.'Import Date'
+	toColumn: LocalDateTable_8ed056c2-cc44-4010-be76-aae0393a93c4.Date
+
+relationship e8d82e05-de6f-46ee-93c4-421516a2e15c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Top 10 Pipeline'.'OI date'
+	toColumn: LocalDateTable_9d8b6868-8403-4f4c-972b-78332c36ceec.Date
+
+relationship REL_CRMData_SalesFixed_ProductGroup
+	fromColumn: 'CRM Data'.'Product Group'
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_SalesHMR_SalesFixed_ProductGroup
+	fromColumn: 'Sales HMR'.'Product Group'
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_SalesGrey_SalesFixed_ProductGroup
+	fromColumn: 'Sales Grey'.'Product Group'
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_OIGMasSold_SalesFixed_ProductGroup
+	fromColumn: 'OI GM as sold'.'Product Group'
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_CleanTech_SalesFixed_ProductGroup
+	fromColumn: 'Clean Tech (WS8)'.'Product Group'
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_OIGMGreenAmmonia_SalesFixed_ProductGroup
+	fromColumn: 'OI GM Green Ammonia (WS7)'.'Product Group'
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_OUPP_SalesFixed_ProductGroup
+	fromColumn: 'OU PP (WS4)'.'Product Group'
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_ProjectExec_CRMData_Projects
+	fromColumn: 'Project execution (WS3)'.Projects
+	toColumn: 'CRM Data'.Projects
+
+relationship REL_Top10Pipeline_CRMData_Projects
+	fromColumn: 'Top 10 Pipeline'.Projects
+	toColumn: 'CRM Data'.Projects
+
+relationship REL_CRMData_ProposalCost_OU
+	fromColumn: 'CRM Data'.OU
+	toColumn: 'Proposal Cost'.OU
+
+relationship REL_CostHours_CRMData_Workstream_INACTIVE
+	isActive: false
+	fromColumn: 'Cost and Hours per Month'.Workstream
+	toColumn: 'Sales Fixed'.'Product Group'
+
+relationship REL_OverheadWS5_Overheads_INACTIVE
+	isActive: false
+	fromColumn: Overhead(WS5).'Actuals Total'
+	toColumn: Overheads.'Actuals Total'
+

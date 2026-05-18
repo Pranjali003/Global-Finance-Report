@@ -1,0 +1,211 @@
+{
+  "config": "{\"version\":\"5.70\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY26SU02\",\"type\":2,\"version\":{\"visual\":\"2.6.0\",\"report\":\"3.1.0\",\"page\":\"2.3.0\"}},\"customTheme\":{\"name\":\"Sales_Dashboard_Dark8016015628374015.json\",\"type\":1,\"version\":{\"visual\":\"2.7.0\",\"report\":\"3.2.0\",\"page\":\"2.3.1\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY26SU02",
+            "path": "BaseThemes/CY26SU02.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "items": [
+          {
+            "name": "Sales_Dashboard_Dark8016015628374015.json",
+            "path": "Sales_Dashboard_Dark8016015628374015.json",
+            "type": 100
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#252423'\"}}}}}}}]}}",
+      "displayName": "Global Finance",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "c306bc14f832c11fad54",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0ebd1c01c179f0eaacd3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1048.5714285714287,\"y\":252.85714285714286,\"z\":12003,\"width\":224.2857142857143,\"height\":75.71428571428572,\"tabOrder\":12003}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Project execution (WS3).GM RAG Status\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Project execution (WS3)\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"GM RAG Status\"},\"Name\":\"Project execution (WS3).GM RAG Status\",\"NativeReferenceName\":\"GM RAG Status\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 75.71,
+          "width": 224.29,
+          "x": 1048.57,
+          "y": 252.86,
+          "z": 12003.00
+        },
+        {
+          "config": "{\"name\":\"132f3a88c468c966c25a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1048.5714285714287,\"y\":335.7142857142857,\"z\":12002,\"width\":224.2857142857143,\"height\":75.71428571428572,\"tabOrder\":12002}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"CRM Data.OI RAG Status\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"OI RAG Status\"},\"Name\":\"CRM Data.OI RAG Status\",\"NativeReferenceName\":\"OI RAG Status\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 75.71,
+          "width": 224.29,
+          "x": 1048.57,
+          "y": 335.71,
+          "z": 12002.00
+        },
+        {
+          "config": "{\"name\":\"1fd569c1db5286f1bea5\",\"layouts\":[{\"id\":0,\"position\":{\"x\":7.142857142857143,\"y\":78.57142857142857,\"z\":2000,\"width\":1267.142857142857,\"height\":74.28571428571429,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}},\"roundEdge\":{\"expr\":{\"Literal\":{\"Value\":\"9L\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}},\"selector\":{\"id\":\"default\"}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 74.29,
+          "width": 1267.14,
+          "x": 7.14,
+          "y": 78.57,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"2d240302ba39e27180c6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1141.4285714285716,\"y\":82.85714285714286,\"z\":6000,\"width\":111.42857142857143,\"height\":31.42857142857143,\"tabOrder\":10000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'clearAllSlicers'\"}}}},\"selector\":{\"id\":\"default\"}},{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"text\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Clear all slicers'\"}}},\"horizontalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'ClearAllSlicers'\"}}},\"tooltipPlaceholderText\":{\"expr\":{\"Literal\":{\"Value\":\"'Clear all slicers on this page'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 31.43,
+          "width": 111.43,
+          "x": 1141.43,
+          "y": 82.86,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"4fbc82588574f4d03424\",\"layouts\":[{\"id\":0,\"position\":{\"x\":561.4285714285714,\"y\":164.2857142857143,\"z\":11000,\"width\":470.00000000000006,\"height\":227.14285714285717,\"tabOrder\":11000}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Tooltips\":[{\"queryRef\":\"CRM Data.OI Achievement %\"},{\"queryRef\":\"CRM Data.OI vs Target Volume Var\"}],\"Y\":[{\"queryRef\":\"Project execution (WS3).Overall GM%\"},{\"queryRef\":\"OI GM as sold.OI Target GM% (Sold)\"}],\"Category\":[{\"queryRef\":\"CRM Data.Product Group\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Project execution (WS3)\",\"Type\":0},{\"Name\":\"o\",\"Entity\":\"OI GM as sold\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"OI Achievement %\"},\"Name\":\"CRM Data.OI Achievement %\",\"NativeReferenceName\":\"OI Achievement %\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"OI vs Target Volume Var\"},\"Name\":\"CRM Data.OI vs Target Volume Var\",\"NativeReferenceName\":\"OI vs Target Volume Var\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Overall GM%\"},\"Name\":\"Project execution (WS3).Overall GM%\",\"NativeReferenceName\":\"Overall GM%\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Property\":\"OI Target GM% (Sold)\"},\"Name\":\"OI GM as sold.OI Target GM% (Sold)\",\"NativeReferenceName\":\"OI Target GM% (Sold)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Product Group\"},\"Name\":\"CRM Data.Product Group\",\"NativeReferenceName\":\"Product Group\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Overall GM%\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'GM% Actual vs Target by Product Group'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 227.14,
+          "width": 470.00,
+          "x": 561.43,
+          "y": 164.29,
+          "z": 11000.00
+        },
+        {
+          "config": "{\"name\":\"61899c60bcf7b7609bc2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":8.571428571428571,\"y\":422.8571428571429,\"z\":9000,\"width\":310,\"height\":287.14285714285717,\"tabOrder\":8000}}],\"singleVisual\":{\"visualType\":\"clusteredBarChart\",\"projections\":{\"Y\":[{\"queryRef\":\"CRM Data.Total OI Actual Volume\"},{\"queryRef\":\"Sales HMR.OI Budget Volume (HMR)\"},{\"queryRef\":\"Sales Fixed.Total OI Target Volume\"}],\"Category\":[{\"queryRef\":\"Sales All.Product Group\",\"active\":true}],\"Tooltips\":[{\"queryRef\":\"Project execution (WS3).GM% Erosion Indicator\"},{\"queryRef\":\"Project execution (WS3).Total GM\"},{\"queryRef\":\"Project execution (WS3).Total Project Volume\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0},{\"Name\":\"s1\",\"Entity\":\"Sales Fixed\",\"Type\":0},{\"Name\":\"s2\",\"Entity\":\"Sales HMR\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Sales All\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Project execution (WS3)\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Total OI Actual Volume\"},\"Name\":\"CRM Data.Total OI Actual Volume\",\"NativeReferenceName\":\"Total OI Actual Volume\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Total OI Target Volume\"},\"Name\":\"Sales Fixed.Total OI Target Volume\",\"NativeReferenceName\":\"Total OI Target Volume\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s2\"}},\"Property\":\"OI Budget Volume (HMR)\"},\"Name\":\"Sales HMR.OI Budget Volume (HMR)\",\"NativeReferenceName\":\"OI Budget Volume (HMR)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Product Group\"},\"Name\":\"Sales All.Product Group\",\"NativeReferenceName\":\"Product Group\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"GM% Erosion Indicator\"},\"Name\":\"Project execution (WS3).GM% Erosion Indicator\",\"NativeReferenceName\":\"GM% Erosion Indicator\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Total GM\"},\"Name\":\"Project execution (WS3).Total GM\",\"NativeReferenceName\":\"Total GM\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Total Project Volume\"},\"Name\":\"Project execution (WS3).Total Project Volume\",\"NativeReferenceName\":\"Total Project Volume\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Total OI Actual Volume\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'OI Actual vs Target vs Budget by Product Group'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 287.14,
+          "width": 310.00,
+          "x": 8.57,
+          "y": 422.86,
+          "z": 9000.00
+        },
+        {
+          "config": "{\"name\":\"756aedc46a4470fed328\",\"layouts\":[{\"id\":0,\"position\":{\"x\":25.714285714285715,\"y\":5.714285714285714,\"z\":1000,\"width\":640,\"height\":55.714285714285715,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Global Finance Overview\",\"textStyle\":{\"fontSize\":\"20pt\"}}]},{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 55.71,
+          "width": 640.00,
+          "x": 25.71,
+          "y": 5.71,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"813f5cd6bd4b02aacd18\",\"layouts\":[{\"id\":0,\"position\":{\"x\":775.7142857142858,\"y\":84.28571428571429,\"z\":5000,\"width\":201.42857142857144,\"height\":62.85714285714286,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"CRM Data.OI date.Variation.Date Hierarchy.Year\",\"active\":true},{\"queryRef\":\"CRM Data.OI date.Variation.Date Hierarchy.Quarter\"},{\"queryRef\":\"CRM Data.OI date.Variation.Date Hierarchy.Month\"},{\"queryRef\":\"CRM Data.OI date.Variation.Date Hierarchy.Day\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Name\":\"Variation\",\"Property\":\"OI date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"},\"Name\":\"CRM Data.OI date.Variation.Date Hierarchy.Year\",\"NativeReferenceName\":\"OI date Year\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Name\":\"Variation\",\"Property\":\"OI date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Quarter\"},\"Name\":\"CRM Data.OI date.Variation.Date Hierarchy.Quarter\",\"NativeReferenceName\":\"OI date Quarter\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Name\":\"Variation\",\"Property\":\"OI date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Month\"},\"Name\":\"CRM Data.OI date.Variation.Date Hierarchy.Month\",\"NativeReferenceName\":\"OI date Month\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Name\":\"Variation\",\"Property\":\"OI date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Day\"},\"Name\":\"CRM Data.OI date.Variation.Date Hierarchy.Day\",\"NativeReferenceName\":\"OI date Day\"}]},\"expansionStates\":[{\"roles\":[\"Values\"],\"levels\":[{\"queryRefs\":[\"CRM Data.OI date.Variation.Date Hierarchy.Year\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_51eb3867-371c-499f-bf73-26725cc9f7a1\"}},\"Property\":\"Year\"}}],\"isPinned\":true},{\"queryRefs\":[\"CRM Data.OI date.Variation.Date Hierarchy.Quarter\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_51eb3867-371c-499f-bf73-26725cc9f7a1\"}},\"Property\":\"Quarter\"}}],\"isPinned\":true},{\"queryRefs\":[\"CRM Data.OI date.Variation.Date Hierarchy.Month\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_51eb3867-371c-499f-bf73-26725cc9f7a1\"}},\"Property\":\"Month\"}}],\"isPinned\":true},{\"queryRefs\":[\"CRM Data.OI date.Variation.Date Hierarchy.Day\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"2024L\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Qtr 1'\"}}],\"isToggled\":true,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'January'\"}}],\"isToggled\":true}]}]}]}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 62.86,
+          "width": 201.43,
+          "x": 775.71,
+          "y": 84.29,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"826b17f1204a9c748746\",\"layouts\":[{\"id\":0,\"position\":{\"x\":788.5714285714287,\"y\":422.8571428571429,\"z\":12001,\"width\":484.28571428571433,\"height\":287.14285714285717,\"tabOrder\":12001}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"CRM Data.OU\",\"active\":true}],\"Y\":[{\"queryRef\":\"CRM Data.OI Achievement %\"}],\"Tooltips\":[{\"queryRef\":\"CRM Data.Total OI Actual Volume\"},{\"queryRef\":\"Sales Fixed.Total OI Target Volume\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Sales Fixed\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"OU\"},\"Name\":\"CRM Data.OU\",\"NativeReferenceName\":\"OU\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"OI Achievement %\"},\"Name\":\"CRM Data.OI Achievement %\",\"NativeReferenceName\":\"OI Achievement %\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Total OI Actual Volume\"},\"Name\":\"CRM Data.Total OI Actual Volume\",\"NativeReferenceName\":\"Total OI Actual Volume\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Total OI Target Volume\"},\"Name\":\"Sales Fixed.Total OI Target Volume\",\"NativeReferenceName\":\"Total OI Target Volume\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"OI Achievement %\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'OI Achievement % by OU'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 287.14,
+          "width": 484.29,
+          "x": 788.57,
+          "y": 422.86,
+          "z": 12001.00
+        },
+        {
+          "config": "{\"name\":\"8b456af700cd184a3146\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":262.8571428571429,\"z\":10000,\"width\":238.57142857142858,\"height\":72.85714285714286,\"tabOrder\":9000}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"CRM Data.Import Date.Variation.Date Hierarchy.Day\",\"active\":true}],\"Y\":[{\"queryRef\":\"CRM Data.Total OI Actual Volume\"}],\"Y2\":[{\"queryRef\":\"Sales Fixed.Total OI Target Volume\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Sales Fixed\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Name\":\"Variation\",\"Property\":\"Import Date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Day\"},\"Name\":\"CRM Data.Import Date.Variation.Date Hierarchy.Day\",\"NativeReferenceName\":\"Import Date Day\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Total OI Actual Volume\"},\"Name\":\"CRM Data.Total OI Actual Volume\",\"NativeReferenceName\":\"Total OI Actual Volume\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Total OI Target Volume\"},\"Name\":\"Sales Fixed.Total OI Target Volume\",\"NativeReferenceName\":\"Total OI Target Volume\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Name\":\"Variation\",\"Property\":\"Import Date\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Day\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"legend\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"lineStyles\":[{\"properties\":{\"strokeShow\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showMarker\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"categoryAxis\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"valueAxis\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 72.86,
+          "width": 238.57,
+          "x": 0.00,
+          "y": 262.86,
+          "z": 10000.00
+        },
+        {
+          "config": "{\"name\":\"969cb1bf0ac2fd49c590\",\"layouts\":[{\"id\":0,\"position\":{\"x\":8.571428571428571,\"y\":157.14285714285714,\"z\":7000,\"width\":188.57142857142858,\"height\":95.71428571428572,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"CRM Data.Total OI Actual Volume\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Total OI Actual Volume\"},\"Name\":\"CRM Data.Total OI Actual Volume\",\"NativeReferenceName\":\"Total OI Actual Volume\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Total OI Actual Volume\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{},\"vcObjects\":{\"padding\":[{\"properties\":{\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"top\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 95.71,
+          "width": 188.57,
+          "x": 8.57,
+          "y": 157.14,
+          "z": 7000.00
+        },
+        {
+          "config": "{\"name\":\"aceee6ee6a243e0a7ada\",\"layouts\":[{\"id\":0,\"position\":{\"x\":325.7142857142857,\"y\":84.28571428571429,\"z\":4000,\"width\":201.42857142857144,\"height\":62.85714285714286,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"CRM Data.Product Group\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"CRM Data\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Product Group\"},\"Name\":\"CRM Data.Product Group\",\"NativeReferenceName\":\"Product Group\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 62.86,
+          "width": 201.43,
+          "x": 325.71,
+          "y": 84.29,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"bb298d4e9eed0245807b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":325.7142857142857,\"y\":422.8571428571429,\"z\":12000,\"width\":450.00000000000006,\"height\":287.14285714285717,\"tabOrder\":12000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Top 10 Pipeline.OI date\"},{\"queryRef\":\"Sum(Top 10 Pipeline.get )\"},{\"queryRef\":\"Sum(Top 10 Pipeline.go)\"},{\"queryRef\":\"Top 10 Pipeline.Legal Entity\"},{\"queryRef\":\"Top 10 Pipeline.OI Volume\"},{\"queryRef\":\"Top 10 Pipeline.Projects\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Top 10 Pipeline\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"get \"},\"Name\":\"Sum(Top 10 Pipeline.get )\",\"NativeReferenceName\":\"get \"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"go\"},\"Name\":\"Sum(Top 10 Pipeline.go)\",\"NativeReferenceName\":\"go\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Legal Entity\"},\"Name\":\"Top 10 Pipeline.Legal Entity\",\"NativeReferenceName\":\"Legal Entity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"OI Volume\"},\"Name\":\"Top 10 Pipeline.OI Volume\",\"NativeReferenceName\":\"OI Volume\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Projects\"},\"Name\":\"Top 10 Pipeline.Projects\",\"NativeReferenceName\":\"Projects\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"OI date\"},\"Name\":\"Top 10 Pipeline.OI date\",\"NativeReferenceName\":\"OI date\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 287.14,
+          "width": 450.00,
+          "x": 325.71,
+          "y": 422.86,
+          "z": 12000.00
+        },
+        {
+          "config": "{\"name\":\"cabcf1f0be16791d38f6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":215.71428571428572,\"y\":157.14285714285714,\"z\":8000,\"width\":204.2857142857143,\"height\":95.71428571428572,\"tabOrder\":7000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Sales Fixed.Total OI Target Volume\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Sales Fixed\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Total OI Target Volume\"},\"Name\":\"Sales Fixed.Total OI Target Volume\",\"NativeReferenceName\":\"Total OI Target Volume\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Total OI Target Volume\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{},\"vcObjects\":{\"padding\":[{\"properties\":{\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"top\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 95.71,
+          "width": 204.29,
+          "x": 215.71,
+          "y": 157.14,
+          "z": 8000.00
+        },
+        {
+          "config": "{\"name\":\"cb11524d471939cfab57\",\"layouts\":[{\"id\":0,\"position\":{\"x\":5.714285714285714,\"y\":4.285714285714286,\"z\":0,\"width\":1267.142857142857,\"height\":65.71428571428572,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}},\"roundEdge\":{\"expr\":{\"Literal\":{\"Value\":\"9L\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}},\"selector\":{\"id\":\"default\"}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 65.71,
+          "width": 1267.14,
+          "x": 5.71,
+          "y": 4.29,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"dc3349cc7b0a9c44ff61\",\"layouts\":[{\"id\":0,\"position\":{\"x\":551.4285714285714,\"y\":84.28571428571429,\"z\":3000,\"width\":201.42857142857144,\"height\":62.85714285714286,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Cost and Hours per Month.Location\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Cost and Hours per Month\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Location\"},\"Name\":\"Cost and Hours per Month.Location\",\"NativeReferenceName\":\"Location\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 62.86,
+          "width": 201.43,
+          "x": 551.43,
+          "y": 84.29,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"df8ec9a92c5cea852340\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1048.5714285714287,\"y\":157.14285714285714,\"z\":12004,\"width\":224.2857142857143,\"height\":90,\"tabOrder\":12004}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Cost and Hours per Month.Cost RAG Status\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Cost and Hours per Month\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Cost RAG Status\"},\"Name\":\"Cost and Hours per Month.Cost RAG Status\",\"NativeReferenceName\":\"Cost RAG Status\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}},\"selector\":{\"id\":\"default\"}}],\"label\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}},\"selector\":{\"id\":\"default\"}}],\"padding\":[{\"properties\":{\"paddingUniform\":{\"expr\":{\"Literal\":{\"Value\":\"12L\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 90.00,
+          "width": 224.29,
+          "x": 1048.57,
+          "y": 157.14,
+          "z": 12004.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "eff60002793045d7a875",
+      "ordinal": 1,
+      "visualContainers": [],
+      "width": 1280.00
+    }
+  ],
+  "theme": "Sales_Dashboard_Dark8016015628374015.json"
+}

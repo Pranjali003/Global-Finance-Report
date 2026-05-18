@@ -1,0 +1,97 @@
+table 'Proposal Cost'
+	lineageTag: b80312a8-0d2c-4387-ba9b-1af3fe0969c1
+
+	column OU
+		dataType: string
+		lineageTag: 72e91991-952f-4174-bf40-5580b3fbe8a8
+		summarizeBy: none
+		sourceColumn: OU
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Ratio'
+		dataType: double
+		lineageTag: 0aac24bb-d1b9-4e9e-b7af-31bf92a4f923
+		summarizeBy: none
+		sourceColumn: Target Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'YTD Proposal costs'
+		dataType: int64
+		formatString: 0
+		lineageTag: 98c0b226-cf05-4cb2-844d-557457fdc7b1
+		summarizeBy: none
+		sourceColumn: YTD Proposal costs
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'YTD Order Intake'
+		dataType: int64
+		formatString: 0
+		lineageTag: c56fec75-cb1e-4d6c-b01d-1ccd2a8be93a
+		summarizeBy: none
+		sourceColumn: YTD Order Intake
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'YTD Ratio'
+		dataType: double
+		lineageTag: 0ad72318-f873-4819-bf06-d903c0b89005
+		summarizeBy: none
+		sourceColumn: YTD Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Estimation Proposal costs'
+		dataType: int64
+		formatString: 0
+		lineageTag: bc0b6820-6e1f-4fef-9f0c-74a6cde06f2c
+		summarizeBy: none
+		sourceColumn: Total Estimation Proposal costs
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Estimation Order Intake'
+		dataType: int64
+		formatString: 0
+		lineageTag: 728e8ff8-fb85-4c7d-84ef-ef4b1ed9a019
+		summarizeBy: none
+		sourceColumn: Total Estimation Order Intake
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Estimation Ratio'
+		dataType: double
+		lineageTag: c6ea32f3-3280-4bd9-a8bc-5077ca9408db
+		summarizeBy: none
+		sourceColumn: Total Estimation Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Proposal Cost' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Proposal Cost_Sheet" = Source{[Item="Proposal Cost",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Proposal Cost_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OU", type text}, {"Target Ratio", type number}, {"YTD Proposal costs", Int64.Type}, {"YTD Order Intake", Int64.Type}, {"YTD Ratio", type number}, {"Total Estimation Proposal costs", Int64.Type}, {"Total Estimation Order Intake", Int64.Type}, {"Total Estimation Ratio", type number}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"Total Estimation Ratio", Percentage.Type}}),
+				    #"Divided Column" = Table.TransformColumns(#"Changed Type1", {{"Total Estimation Ratio", each _ / 100, Percentage.Type}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Divided Column",{{"YTD Ratio", Percentage.Type}}),
+				    #"Divided Column1" = Table.TransformColumns(#"Changed Type2", {{"YTD Ratio", each _ / 10, Percentage.Type}}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Divided Column1",{{"Target Ratio", Percentage.Type}})
+				in
+				    #"Changed Type3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

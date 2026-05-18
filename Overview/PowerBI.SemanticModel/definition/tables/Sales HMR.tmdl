@@ -1,0 +1,107 @@
+table 'Sales HMR'
+	lineageTag: a3dd073c-8076-417c-aa01-73cd6080de61
+
+	/// OI YTD Volume from Sales HMR
+	measure 'OI YTD Volume (HMR)' = SUM('Sales HMR'[OI YTD 22/23])
+		formatString: #,0
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: cfd662dd-ae18-4a0e-8c84-ccc293acde53
+
+	/// OI Estimate volume from Sales HMR
+	measure 'OI Estimate Volume (HMR)' = SUM('Sales HMR'[OI Estimate 22/23])
+		formatString: #,0
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: 13b18593-2df8-4921-a676-2f47435a95c8
+
+	/// OI Budget volume from Sales HMR
+	measure 'OI Budget Volume (HMR)' = SUM('Sales HMR'[OI Budget 23/24])
+		formatString: #,0
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: ba6facc3-5ec3-426b-900f-53d7188c490c
+
+	column 'Product Group'
+		dataType: string
+		lineageTag: 359a956f-f18c-49e3-bd0a-bd950776d309
+		summarizeBy: none
+		sourceColumn: Product Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI YTD 22/23'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bd82a9e-3716-4d94-8904-41c3ba8f5b06
+		summarizeBy: sum
+		sourceColumn: OI YTD 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI YTD GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: a50c1025-438c-4861-8c27-ea3a5619d2df
+		summarizeBy: sum
+		sourceColumn: OI YTD GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Estimate 22/23'
+		dataType: int64
+		formatString: 0
+		lineageTag: 164c9c5f-fa15-41bb-8f60-800f1b9b0fe4
+		summarizeBy: sum
+		sourceColumn: OI Estimate 22/23
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Estimate GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: ef018e41-1431-492f-985b-5287723b001d
+		summarizeBy: sum
+		sourceColumn: OI Estimate GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Budget 23/24'
+		dataType: int64
+		formatString: 0
+		lineageTag: cc28a0da-34f2-4070-8020-8e0afad9c257
+		summarizeBy: sum
+		sourceColumn: OI Budget 23/24
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI Budget GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: 522d5708-7a35-4585-b6c5-a92ba26ff850
+		summarizeBy: sum
+		sourceColumn: OI Budget GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue Covered by Backlog'
+		dataType: int64
+		formatString: 0
+		lineageTag: 14e74331-bf4b-4927-83ee-284b3b22f08c
+		summarizeBy: sum
+		sourceColumn: Revenue Covered by Backlog
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sales HMR' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"Sales HMR_Sheet" = Source{[Item="Sales HMR",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Sales HMR_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product Group", type text}, {"OI YTD 22/23", Int64.Type}, {"OI YTD GM%", Int64.Type}, {"OI Estimate 22/23", Int64.Type}, {"OI Estimate GM%", Int64.Type}, {"OI Budget 23/24", Int64.Type}, {"OI Budget GM%", Int64.Type}, {"Revenue Covered by Backlog", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

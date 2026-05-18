@@ -1,0 +1,53 @@
+table 'OU CP (WS4)'
+	lineageTag: 33f913a4-d911-4855-acdc-df60b0e6b995
+
+	column 'Cost account'
+		dataType: string
+		lineageTag: 7ab0db43-8f7c-4764-abaf-634f07110a8f
+		summarizeBy: none
+		sourceColumn: Cost account
+
+		annotation SummarizationSetBy = Automatic
+
+	column Plan
+		dataType: int64
+		formatString: 0
+		lineageTag: 43327a19-e3f0-4b52-af42-ab3d55b1c192
+		summarizeBy: sum
+		sourceColumn: Plan
+
+		annotation SummarizationSetBy = Automatic
+
+	column Actual
+		dataType: int64
+		formatString: 0
+		lineageTag: 7bce2c45-27b9-4ee9-84a9-efef7b574e90
+		summarizeBy: sum
+		sourceColumn: Actual
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estimate
+		dataType: int64
+		formatString: 0
+		lineageTag: 00722739-3175-4bc3-a827-640606b1c578
+		summarizeBy: sum
+		sourceColumn: Estimate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'OU CP (WS4)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"OU CP (WS4)_Sheet" = Source{[Item="OU CP (WS4)",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"OU CP (WS4)_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Cost account", type text}, {"Plan", Int64.Type}, {"Actual", Int64.Type}, {"Estimate", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

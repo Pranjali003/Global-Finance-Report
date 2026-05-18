@@ -1,0 +1,185 @@
+table 'CRM Data'
+	lineageTag: 33557fde-67af-41c7-a94d-f5bef25ca188
+
+	/// Total actual Order Intake Volume from CRM
+	measure 'Total OI Actual Volume' = SUM('CRM Data'[OI Volume])
+		formatString: #,0
+		displayFolder: 01 | Order Intake
+		lineageTag: fd0c4cae-c356-44c2-82fc-7868d735661e
+
+	/// Weighted average OI GM% from CRM actuals
+	measure 'Avg OI Actual GM%' = DIVIDE(SUMX('CRM Data', 'CRM Data'[OI Volume] * 'CRM Data'[OI GM%]), SUM('CRM Data'[OI Volume]), 0) / 100
+		formatString: 0.0%
+		displayFolder: 01 | Order Intake
+		lineageTag: 46949e68-7cec-4600-b289-f87d1e705edc
+
+	/// Variance of Actual OI vs Target Volume
+	measure 'OI vs Target Volume Var' = SUM('CRM Data'[OI Volume]) - SUM('Sales Fixed'[Order Intake Target volume])
+		formatString: #,0
+		displayFolder: 01 | Order Intake
+		lineageTag: ca9d53d6-00da-42c4-87a6-14e17c995c03
+
+	/// Order Intake achievement rate vs target
+	measure 'OI Achievement %' = DIVIDE(SUM('CRM Data'[OI Volume]), SUM('Sales Fixed'[Order Intake Target volume]), 0)
+		formatString: 0.0%
+		displayFolder: 01 | Order Intake
+		lineageTag: ba7e5e13-b0cc-4bc4-aa2a-d950b4a11359
+
+	/// Total Pipeline X volume from CRM
+	measure 'Pipeline X Volume' = CALCULATE(SUM('CRM Data'[OI Volume]), 'CRM Data'[Pipeline X/Y] = "Pipeline X")
+		formatString: #,0
+		displayFolder: 04 | Pipeline
+		lineageTag: b1c184da-32f9-4f01-9c3a-a7bb27ed07ca
+
+	/// Total Pipeline Y volume from CRM
+	measure 'Pipeline Y Volume' = CALCULATE(SUM('CRM Data'[OI Volume]), 'CRM Data'[Pipeline X/Y] = "Pipeline Y")
+		formatString: #,0
+		displayFolder: 04 | Pipeline
+		lineageTag: 4aad3e72-e6bd-4f4c-8769-6f5accda5bb4
+
+	/// Count of active pipeline projects in CRM
+	measure '# Active Projects' = DISTINCTCOUNT('CRM Data'[Projects])
+		formatString: #,0
+		displayFolder: 04 | Pipeline
+		lineageTag: 601876cd-f14d-4418-b21d-0d6a73151585
+
+	/// Count of unique countries/legal entities
+	measure '# Countries' = DISTINCTCOUNT('CRM Data'[Legal Entity])
+		formatString: #,0
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: fdfa23ec-33dd-4109-84f1-5ecb64529cd5
+
+	/// Count of unique OUs
+	measure '# OUs' = DISTINCTCOUNT('CRM Data'[OU])
+		formatString: #,0
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: 8046e448-d3f2-4e0e-9923-505c860900c6
+
+	/// RAG flag: 1=Red if OI achievement < 80%, 0=Green
+	measure 'OI RAG Status' = IF(DIVIDE(SUM('CRM Data'[OI Volume]), SUM('Sales Fixed'[Order Intake Target volume]), 0) < 0.8, "🔴 At Risk", IF(DIVIDE(SUM('CRM Data'[OI Volume]), SUM('Sales Fixed'[Order Intake Target volume]), 0) < 0.95, "🟡 Watch", "🟢 On Track"))
+		displayFolder: 05 | Dimensions & KPI Flags
+		lineageTag: 27485d8d-cf10-4743-8007-19c712f4e98c
+
+	column Projects
+		dataType: string
+		lineageTag: 2e91ec1d-ede1-483e-aa44-78314497b992
+		summarizeBy: none
+		sourceColumn: Projects
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Legal Entity'
+		dataType: string
+		lineageTag: 0abd1f6f-09de-4eb8-89fa-01593f633e80
+		summarizeBy: none
+		sourceColumn: Legal Entity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group'
+		dataType: string
+		lineageTag: 6df6497a-8891-42ea-8ea0-478f242e773d
+		summarizeBy: none
+		sourceColumn: Product Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column OU
+		dataType: string
+		lineageTag: e8bcb7d4-5205-4825-b99e-40897e9efde2
+		summarizeBy: none
+		sourceColumn: OU
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline X/Y'
+		dataType: string
+		lineageTag: 9bdb40a1-0bbc-4034-827b-94f5cdb2e48b
+		summarizeBy: none
+		sourceColumn: Pipeline X/Y
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b9f20fbc-8f32-4de0-8ea1-3264e0243e31
+		summarizeBy: none
+		sourceColumn: OI date
+
+		variation Variation
+			isDefault
+			relationship: 23b5a78f-20ba-491d-aca0-5e012f5569ee
+			defaultHierarchy: LocalDateTable_51eb3867-371c-499f-bf73-26725cc9f7a1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'OI Volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: fe530099-daad-48c1-9229-9fd5975b77d8
+		summarizeBy: sum
+		sourceColumn: OI Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OI GM%'
+		dataType: int64
+		formatString: 0
+		lineageTag: f16372b3-28db-4324-a3f9-4f11a69abd47
+		summarizeBy: sum
+		sourceColumn: OI GM%
+
+		annotation SummarizationSetBy = Automatic
+
+	column Go
+		dataType: int64
+		formatString: 0
+		lineageTag: 049196b9-7ff6-4436-9446-dc29f6854e00
+		summarizeBy: sum
+		sourceColumn: Go
+
+		annotation SummarizationSetBy = Automatic
+
+	column Get
+		dataType: int64
+		formatString: 0
+		lineageTag: 913c5932-b1d5-4540-befc-14dc75b080e8
+		summarizeBy: sum
+		sourceColumn: Get
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Import Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5211efaf-3817-4950-aec9-3b726489b849
+		summarizeBy: none
+		sourceColumn: Import Date
+
+		variation Variation
+			isDefault
+			relationship: 4f42b9c6-78d2-45b7-aa96-2c7067948d39
+			defaultHierarchy: LocalDateTable_8ed056c2-cc44-4010-be76-aae0393a93c4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'CRM Data' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Pranjali.Waghchaure\Desktop\Data\Capstone 2-Finance\Input data template.xlsx"), null, true),
+				    #"CRM Data_Sheet" = Source{[Item="CRM Data",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"CRM Data_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Projects", type text}, {"Legal Entity", type text}, {"Product Group", type text}, {"OU", type text}, {"Pipeline X/Y", type text}, {"OI date", type date}, {"OI Volume", Int64.Type}, {"OI GM%", Int64.Type}, {"Go", Int64.Type}, {"Get", Int64.Type}, {"Import Date", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
