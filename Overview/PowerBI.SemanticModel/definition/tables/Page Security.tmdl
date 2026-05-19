@@ -1,0 +1,33 @@
+table 'Page Security'
+	lineageTag: 77252a6f-bb8d-4edc-96fc-fb1004c78ec2
+
+	measure 'Logged In User' = USERPRINCIPALNAME()
+		lineageTag: 85cd9c6f-b0d0-4d3f-8c76-ab4119bf2ff7
+
+	column 'User ID'
+		dataType: string
+		lineageTag: a1d28b69-ccbf-4aa0-b9c9-a2a5dadd29e6
+		summarizeBy: none
+		sourceColumn: User ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Page Name'
+		dataType: string
+		lineageTag: 5fc330ba-fd43-46cc-b042-8b9ba4d485f2
+		summarizeBy: none
+		sourceColumn: Page Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Security' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jcw7CoAwDADQq0hmEfzt3sDRQToECUZqq0TbgqcX6uTgZ3+8voc14MgDoxNqVhSNkk0WUugW0dsuhCbJQaW/YBGh0WTHj+zdlNHw4cS9qCoq9IzWoL2z1pP4icJFNqZZPz41KHUC", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"User ID" = _t, #"Page Name" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"User ID", type text}, {"Page Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

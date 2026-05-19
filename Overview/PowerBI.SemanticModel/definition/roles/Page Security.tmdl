@@ -1,0 +1,7 @@
+role 'Page Security'
+	modelPermission: read
+
+	tablePermission 'Page Security' = 'Page Security'[User ID] == USERPRINCIPALNAME()
+
+	annotation PBI_Id = ce81d53b9a7b4c5c8ab4ee7ad9cc33e6
+

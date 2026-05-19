@@ -8,9 +8,9 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Actual Sales","Billable Ratio(WS5)","Clean Tech (WS8)","Cost and Hours per Month","CRM Data","OI GM as sold","OI GM Green Ammonia (WS7)","OU CP (WS4)","OU PP (WS4)","Overhead(WS5)","Overheads","Page Access","Project execution (WS3)","Proposal Cost","Sales All","Sales Fixed","Sales Grey","Sales HMR","Sales Per Color","Target Sales","Top 10 Pipeline"]
+annotation PBI_QueryOrder = ["Actual Sales","Billable Ratio(WS5)","Clean Tech (WS8)","Cost and Hours per Month","CRM Data","OI GM as sold","OI GM Green Ammonia (WS7)","OU CP (WS4)","OU PP (WS4)","Overhead(WS5)","Overheads","Page Access","Project execution (WS3)","Proposal Cost","Sales All","Sales Fixed","Sales Grey","Sales HMR","Sales Per Color","Target Sales","Top 10 Pipeline","Page Security"]
 
-annotation PBI_ProTooling = ["MCP-PBIModeling"]
+annotation PBI_ProTooling = ["MCP-PBIModeling","DaxQueryView_Desktop"]
 
 ref table 'Actual Sales'
 ref table 'Billable Ratio(WS5)'
@@ -38,6 +38,9 @@ ref table 'Sales Per Color'
 ref table 'Target Sales'
 ref table 'Top 10 Pipeline'
 ref table LocalDateTable_9d8b6868-8403-4f4c-972b-78332c36ceec
+ref table 'Page Security'
+
+ref role 'Page Security'
 
 ref cultureInfo en-US
 

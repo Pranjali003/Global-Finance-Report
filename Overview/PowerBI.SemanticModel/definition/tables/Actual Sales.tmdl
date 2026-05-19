@@ -1,6 +1,30 @@
 table 'Actual Sales'
 	lineageTag: ced03fd8-d28d-4935-a03d-85256af667af
 
+	measure 'New Project for this month' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('Top 10 Pipeline'[Projects]),
+			    'Top 10 Pipeline'[OI date]>=DATE(YEAR(TODAY()),MONTH(TODAY()),01)
+			)
+		formatString: 0
+		lineageTag: 68cab7cd-ad9b-41bc-ac78-8aa132856c05
+
+	measure 'Notification 1' = CONVERT([New Project for this month], TEXT) & "New Project add this month"
+		lineageTag: 318d44bb-8d04-4300-b01f-5010c2d70063
+
+	measure 'Number of notification' =
+			
+			VAR _count=
+			{[New Project for this month]}
+			RETURN
+			COUNTX(
+			    FILTER(
+			        _count,
+			        [Value] >0),[Value])
+		formatString: 0
+		lineageTag: 3f9c457a-5c19-4e3c-b654-4cbe64e6fbfb
+
 	column 'Actual Sales'
 		dataType: string
 		lineageTag: 5f7b5b26-b6c1-44cf-9c8b-728b1fd3ed62
